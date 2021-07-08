@@ -1,0 +1,32 @@
+.
+├── meta-cs-learning_28 : Prejects for BSP
+│   ├── conf
+│   ├── COPYING.MIT
+│   ├── README
+│   ├── recipes-example 
+│   ├── recipes-fsl  
+│   ├── recipes-kernel : Kernel space driver
+│   └── recipes-app : User space application or library
+└── README
+
+1. Build BSP image
+        1.1 repo init and repo sync follow BSP user manual.
+        1.2 copy meta-cs-learning to fsl-auto-yocto-bsp/sources directory.
+	    	$cd downloads
+		$git clone https://github.com/harry-Zhao/cs-gw-s32grdb2.git
+	    	$git checkout master
+	    	$cd ../sources
+		$ln -s ../downloads/cs-gw-s32grdb2/meta-cs-learning_28 meta-cs-learning
+        1.3 execute "source nxp-setup-alb.sh -m s32g274ardb2" according to BSP user manual for RDB.
+        1.4 modify fsl-auto-yocto-bsp/build_s32g274ardb2/conf/bblayers.conf. add absolute path of fsl-auto-yocto-bsp/sources/meta-cs-learning to it.
+      		$cd build_s32g274ardb2
+		$vim conf/bblayers.conf
+		Append “<absolute path>/auto-yocto-bsp/sources/meta-cs-learning \” 
+        1.5 for using PCIe and PFE, modify <build directory>/conf/local.conf, add:
+                        DISTRO_FEATURES_append = " pfe pcie"
+                        PFE_LOCAL_FIRMWARE_DIR = "<PFE Firmware directory>"
+        1.6 build image as normal way.
+
+
+
+
