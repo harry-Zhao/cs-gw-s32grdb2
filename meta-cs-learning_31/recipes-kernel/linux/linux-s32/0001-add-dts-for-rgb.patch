@@ -1,0 +1,93 @@
+From aa9ccda00c1105412a47c476d10de9e65c496467 Mon Sep 17 00:00:00 2001
+From: frank <frank.zhao_1@nxp.com>
+Date: Fri, 18 Mar 2022 17:12:47 +0800
+Subject: [PATCH] add dts for rgb
+
+Signed-off-by: frank <frank.zhao_1@nxp.com>
+---
+ .../boot/dts/freescale/fsl-s32g274a-rdb.dtsi    | 17 +++++++++--------
+ .../boot/dts/freescale/fsl-s32g274a-rdb2.dts    | 12 ++++++++++++
+ 2 files changed, 21 insertions(+), 8 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-s32g274a-rdb.dtsi b/arch/arm64/boot/dts/freescale/fsl-s32g274a-rdb.dtsi
+index a62373b87677..8159621bc9b0 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-s32g274a-rdb.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-s32g274a-rdb.dtsi
+@@ -112,6 +112,7 @@
+ };
+ 
+ &usdhc0 {
++	/delete-property/ no-1-8-v;
+ 	status = "okay";
+ };
+ 
+@@ -195,19 +196,19 @@
+ 
+ 		pinctrl0_dspi1: dspi1grp {
+ 			fsl,pins = <
+-				S32_GEN1_PAD_PA7__SPI1_CS0_OUT
++		/*		S32_GEN1_PAD_PA7__SPI1_CS0_OUT */
+ 				S32_GEN1_PAD_PA6__SPI1_SOUT_OUT
+-				S32_GEN1_PAD_PA8__SPI1_SCK_OUT
+-				S32_GEN1_PAD_PF15__SPI1_SIN_OUT
++		/*		S32_GEN1_PAD_PA8__SPI1_SCK_OUT */
++				S32_GEN1_PAD_PF15__SPI1_SIN_OUT 
+ 			>;
+ 		};
+ 
+ 		pinctrl0_dspi1_slave: dspi1slavegrp {
+ 			fsl,pins = <
+-				S32_GEN1_PAD_PA7__SPI1_CS0_SLAVE_OUT
++		/*		S32_GEN1_PAD_PA7__SPI1_CS0_SLAVE_OUT */
+ 				S32_GEN1_PAD_PA6__SPI1_SOUT_OUT
+-				S32_GEN1_PAD_PA8__SPI1_SCK_SLAVE_OUT
+-				S32_GEN1_PAD_PF15__SPI1_SIN_OUT
++ 		/*		S32_GEN1_PAD_PA8__SPI1_SCK_SLAVE_OUT */
++				S32_GEN1_PAD_PF15__SPI1_SIN_OUT 
+ 			>;
+ 		};
+ 
+@@ -418,7 +419,7 @@
+ 				S32_GEN1_PAD_PF12__SIUL_GPIO92
+ 				S32_GEN1_PAD_PF13__SIUL_GPIO93
+ 				S32_GEN1_PAD_PF14__SIUL_GPIO94
+-				S32_GEN1_PAD_PF15__SIUL_GPIO95
++				S32_GEN1_PAD_PF15__SIUL_GPIO95 
+ 				S32_GEN1_PAD_PG0__SIUL_GPIO96
+ 				S32_GEN1_PAD_PG1__SIUL_GPIO97
+ 				S32_GEN1_PAD_PG2__SIUL_GPIO98
+@@ -474,7 +475,7 @@
+ 			fsl,pins = <
+ 				S32_GEN1_PAD_PA7__SPI1_CS0_SLAVE_IN
+ 				S32_GEN1_PAD_PA8__SPI1_SCK_SLAVE_IN
+-				S32_GEN1_PAD_PF15__SPI1_SIN_IN
++				S32_GEN1_PAD_PF15__SPI1_SIN_IN 
+ 			>;
+ 		};
+ 
+diff --git a/arch/arm64/boot/dts/freescale/fsl-s32g274a-rdb2.dts b/arch/arm64/boot/dts/freescale/fsl-s32g274a-rdb2.dts
+index ae5cbb094b81..d4693cbc6d09 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-s32g274a-rdb2.dts
++++ b/arch/arm64/boot/dts/freescale/fsl-s32g274a-rdb2.dts
+@@ -12,6 +12,18 @@
+ 	model = "Freescale S32G274";
+ 	compatible = "fsl,s32g274-simu", "fsl,s32g274",
+ 				 "arm,vexpress,v2p-aarch64", "arm,vexpress";
++       
++ gpioled {
++                compatible = "s32grdb2,led-rgb";
++                pinctrl-names = "default";
++                pinctrl-0 = <&pinctrl_gpio0>;
++                led-Blue = <&gpio0 6 0>;
++                led-Red = <&gpio0 7 0>;
++                led-Green = <&gpio0 95 0>;
++                status = "okay";
++        };
++
++ 
+ };
+ 
+ &gmac0 {
+-- 
+2.17.1
+
