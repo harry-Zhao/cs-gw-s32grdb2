@@ -16,7 +16,7 @@
 		$git clone https://github.com/harry-Zhao/cs-gw-s32grdb2.git
 	    	$git checkout master
 	    	$cd ../sources
-		$ln -s ../downloads/cs-gw-s32grdb2/meta-cs-learning_28 meta-cs-learning
+		$ln -s ../downloads/cs-gw-s32grdb2/meta-cs-learning_31 meta-cs-learning
         1.3 execute "source nxp-setup-alb.sh -m s32g274ardb2" according to BSP user manual for RDB.
         1.4 modify fsl-auto-yocto-bsp/build_s32g274ardb2/conf/bblayers.conf. add absolute path of fsl-auto-yocto-bsp/sources/meta-cs-learning to it.
       		$cd build_s32g274ardb2
