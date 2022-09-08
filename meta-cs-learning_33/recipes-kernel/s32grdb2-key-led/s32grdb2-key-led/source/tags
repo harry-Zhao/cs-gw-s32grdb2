@@ -1,0 +1,62 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+KEY_CNT	key-main.c	20;"	d	file:
+KEY_NAME	key-main.c	21;"	d	file:
+LEDOFF	dtsled-main.c	19;"	d	file:
+LEDON	dtsled-main.c	18;"	d	file:
+LED_CNT	dtsled-main.c	15;"	d	file:
+LED_NAME	dtsled-main.c	16;"	d	file:
+RGB_init	dtsled-main.c	/^static int RGB_init(void)$/;"	f	file:
+S32GRDB2_LED_H_	s32grdb2_led.h	21;"	d
+__key_init	key-main.c	/^static int __key_init(void)$/;"	f	file:
+cdev	dtsled-main.c	/^    struct cdev cdev;$/;"	m	struct:gpioled_dev	typeref:struct:gpioled_dev::cdev	file:
+cdev	key-main.c	/^    struct cdev cdev;$/;"	m	struct:irq_dev_t	typeref:struct:irq_dev_t::cdev	file:
+class	dtsled-main.c	/^    struct class *class;$/;"	m	struct:gpioled_dev	typeref:struct:gpioled_dev::class	file:
+class	key-main.c	/^    struct class *class;$/;"	m	struct:irq_dev_t	typeref:struct:irq_dev_t::class	file:
+curkeynum	key-main.c	/^    unsigned char curkeynum;$/;"	m	struct:irq_dev_t	file:
+device	dtsled-main.c	/^    struct device *device;$/;"	m	struct:gpioled_dev	typeref:struct:gpioled_dev::device	file:
+device	key-main.c	/^    struct device *device;$/;"	m	struct:irq_dev_t	typeref:struct:irq_dev_t::device	file:
+devid	dtsled-main.c	/^    dev_t devid;$/;"	m	struct:gpioled_dev	file:
+devid	key-main.c	/^    dev_t devid;$/;"	m	struct:irq_dev_t	file:
+gpio	key-main.c	/^    int gpio;$/;"	m	struct:irq_key_t	file:
+gpioled	dtsled-main.c	/^struct gpioled_dev gpioled;$/;"	v	typeref:struct:gpioled_dev
+gpioled_dev	dtsled-main.c	/^struct gpioled_dev {$/;"	s	file:
+gpioled_fops	dtsled-main.c	/^static struct file_operations gpioled_fops = {$/;"	v	typeref:struct:file_operations	file:
+handler	key-main.c	/^    irqreturn_t (*handler)(int, void *);$/;"	m	struct:irq_key_t	file:
+irq_dev_t	key-main.c	/^struct irq_dev_t {$/;"	s	file:
+irq_key	key-main.c	/^    struct irq_key_t irq_key[KEY_CNT];$/;"	m	struct:irq_dev_t	typeref:struct:irq_dev_t::irq_key_t	file:
+irq_key_t	key-main.c	/^struct irq_key_t {$/;"	s	file:
+irqkey_init	key-main.c	/^static int irqkey_init(void)$/;"	f	file:
+irqnum	key-main.c	/^    int irqnum;$/;"	m	struct:irq_key_t	file:
+key_exit	key-main.c	/^module_exit(key_exit);$/;"	v
+key_fops	key-main.c	/^static file_operations key_fops = {$/;"	v	file:
+key_init	key-main.c	/^module_init(key_init);$/;"	v
+key_name	key-main.c	/^char *key_name[2] = {"key1", "key2"};$/;"	v
+keyrelease	key-main.c	/^    atomic_t keyrelease;$/;"	m	struct:irq_dev_t	file:
+keyvalue	key-main.c	/^    atomic_t keyvalue;$/;"	m	struct:irq_dev_t	file:
+led_exit	dtsled-main.c	/^module_exit(led_exit);$/;"	v
+led_exit	dtsled-main.c	/^static void __exit led_exit(void)$/;"	f	file:
+led_gpio	dtsled-main.c	/^    int led_gpio[3];$/;"	m	struct:gpioled_dev	file:
+led_init	dtsled-main.c	/^module_init(led_init);$/;"	v
+led_init	dtsled-main.c	/^static int __init led_init(void)$/;"	f	file:
+led_open	dtsled-main.c	/^static int  led_open(struct inode *inode, struct file *filp)$/;"	f	file:
+led_read	dtsled-main.c	/^static ssize_t led_read(struct file *filp, char __user *buf, size_t cnt, loff_t *offt)$/;"	f	file:
+led_release	dtsled-main.c	/^static int led_release(struct inode *inode, struct file *file)$/;"	f	file:
+led_write	dtsled-main.c	/^static ssize_t led_write(struct file *filp, const char __user *buf, size_t cnt, loff_t *offt)$/;"	f	file:
+major	dtsled-main.c	/^    int major;$/;"	m	struct:gpioled_dev	file:
+major	key-main.c	/^    int major;$/;"	m	struct:irq_dev_t	file:
+minor	dtsled-main.c	/^    int minor;$/;"	m	struct:gpioled_dev	file:
+minor	key-main.c	/^    int minor;$/;"	m	struct:irq_dev_t	file:
+name	key-main.c	/^    char name[10];$/;"	m	struct:irq_key_t	file:
+nd	dtsled-main.c	/^    struct device_node *nd;$/;"	m	struct:gpioled_dev	typeref:struct:gpioled_dev::device_node	file:
+nd	key-main.c	/^    struct device_node *nd;$/;"	m	struct:irq_dev_t	typeref:struct:irq_dev_t::device_node	file:
+obj-m	Makefile	/^obj-m := s32grdb2-dtsled.o$/;"	m
+rgb_name	dtsled-main.c	/^uint8_t *rgb_name[3] = {"led-Blue", "led-Red", "led-Green"};$/;"	v
+s32grdb2-key-led-y	Makefile	/^s32grdb2-key-led-y := dtsled-main.o$/;"	m
+simulate_key	key-main.c	/^struct irq_dev_t simulate_key;$/;"	v	typeref:struct:irq_dev_t
+timer	key-main.c	/^    struct timer_list timer;$/;"	m	struct:irq_dev_t	typeref:struct:irq_dev_t::timer_list	file:
+value	key-main.c	/^    unsigned char value;$/;"	m	struct:irq_key_t	file:

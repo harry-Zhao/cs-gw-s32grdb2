@@ -1,0 +1,177 @@
+From d039a8281e4d889e0de2e4b822f6c3356418c092 Mon Sep 17 00:00:00 2001
+From: frank <frank.zhao_1@nxp.com>
+Date: Wed, 7 Sep 2022 10:56:50 +0800
+Subject: [PATCH] Add-led-rgb-and-eirq-node-to-dts
+
+Signed-off-by: frank <frank.zhao_1@nxp.com>
+---
+ .../boot/dts/freescale/s32g274a-rdb2.dtsi     | 54 +++++++++++++++++++
+ .../boot/dts/freescale/s32gxxxa-rdb.dtsi      | 30 +++++------
+ 2 files changed, 69 insertions(+), 15 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/s32g274a-rdb2.dtsi b/arch/arm64/boot/dts/freescale/s32g274a-rdb2.dtsi
+index 3949abf039bb..35496e6300d2 100644
+--- a/arch/arm64/boot/dts/freescale/s32g274a-rdb2.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32g274a-rdb2.dtsi
+@@ -11,6 +11,25 @@
+ #include "s32gxxxa-rdb.dtsi"
+ / {
+ 	model = "NXP S32G274A-RDB2";
++	
++	gpioled {
++		compatible = "s32grdb2,led-rgb";
++		pinctrl-names = "default";
++		pinctrl-0 = <&led_pins>;
++		led-Blue = <&gpio 6 0>;
++                led-Red = <&gpio 7 0>;
++                led-Green = <&gpio 95 0>;
++                status = "okay";
++	};
++	
++	eirqs {
++		compatible = "s32grdb2,eirq";
++		pinctrl-names = "default";
++		pinctrl-0 = <&eirq_pins>;
++		EIRQ_2-gpios = <&gpio 21 4>;
++		EIRQ_3-gpios = <&gpio 22 4>;
++		status = "okay";
++	};
+ };
+ 
+ &usdhc0 {
+@@ -35,3 +54,38 @@
+ 	phy-mode = "sgmii";
+ 	phy-handle = <&gmac_mdio_a_phy3>;
+ };
++
++&pinctrl {
++	led_pins: rgb {
++		rgb_grp0 {
++			pinmux = <S32CC_PINMUX(6, FUNC0)>;
++			output-enable;
++			slew-rate = <S32CC_SLEW_150MHZ>;
++		};	
++                rgb_grp1 {
++                        pinmux = <S32CC_PINMUX(7, FUNC0)>;
++                        output-enable;
++                        slew-rate = <S32CC_SLEW_150MHZ>;
++                }; 
++                rgb_grp2 {
++                        pinmux = <S32CC_PINMUX(95, FUNC0)>;
++                        output-enable;
++                        slew-rate = <S32CC_SLEW_150MHZ>;
++                }; 
++	};
++	
++	eirq_pins: eirq {
++		eirq_grp0 {
++			pinmux = <S32CC_PINMUX(21, FUNC0)>;
++		 	input-enable;
++			slew-rate = <S32CC_SLEW_150MHZ>;
++			bias-pull-up;	
++		};
++		eirq_grp1 {
++		        pinmux = <S32CC_PINMUX(22, FUNC0)>;
++                        input-enable;
++                        slew-rate = <S32CC_SLEW_150MHZ>;
++                        bias-pull-up; 
++		};
++	};
++};
+diff --git a/arch/arm64/boot/dts/freescale/s32gxxxa-rdb.dtsi b/arch/arm64/boot/dts/freescale/s32gxxxa-rdb.dtsi
+index cb0ba0b27759..4352f9b3a184 100644
+--- a/arch/arm64/boot/dts/freescale/s32gxxxa-rdb.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32gxxxa-rdb.dtsi
+@@ -116,7 +116,7 @@
+ 	pinctrl-1 = <&i2c2_gpio_pins>;
+ 	scl-gpios = <&gpio 21 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
+ 	sda-gpios = <&gpio 22 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
+-	status = "okay";
++	status = "disable";
+ };
+ 
+ &i2c4 {
+@@ -283,13 +283,13 @@
+ 
+ 	dspi1_pins: dspi1 {
+ 		dspi1_grp0 {
+-			pinmux = <S32CC_PINMUX(6, FUNC2)>;
++			pinmux = <S32CC_PINMUX(6, FUNC2)>; 
+ 			output-enable;
+ 			slew-rate = <S32CC_SLEW_208MHZ>;
+ 		};
+ 
+ 		dspi1_grp1 {
+-			pinmux = <S32CC_PINMUX(7, FUNC2)>;
++			pinmux = <S32CC_PINMUX(7, FUNC2)>;   
+ 			output-enable;
+ 			slew-rate = <S32CC_SLEW_208MHZ>;
+ 			bias-pull-up;
+@@ -316,13 +316,13 @@
+ 
+ 	dspi1_slave_pins: dspi1slave {
+ 		dspi1slave_grp0 {
+-			pinmux = <S32CC_PINMUX(6, FUNC2)>;
++/*			pinmux = <S32CC_PINMUX(6, FUNC2)>; */
+ 			output-enable;
+ 			slew-rate = <S32CC_SLEW_208MHZ>;
+ 		};
+ 
+-		dspi1slave_grp1 {
+-			pinmux = <S32CC_PINMUX(7, FUNC2)>;
++		dspi1slave_grp1 { 
++/*			pinmux = <S32CC_PINMUX(7, FUNC2)>; */
+ 			input-enable;
+ 			slew-rate = <S32CC_SLEW_208MHZ>;
+ 		};
+@@ -418,8 +418,8 @@
+ 
+ 	i2c2_pins: i2c2 {
+ 		i2c2_grp0 {
+-			pinmux = <S32CC_PINMUX(21, FUNC1)>,
+-				 <S32CC_PINMUX(22, FUNC1)>;
++/*			pinmux = <S32CC_PINMUX(21, FUNC1)>,
++				 <S32CC_PINMUX(22, FUNC1)>;*/
+ 			drive-open-drain;
+ 			output-enable;
+ 			input-enable;
+@@ -427,21 +427,21 @@
+ 		};
+ 
+ 		i2c2_grp1 {
+-			pinmux = <S32CC_PINMUX(719, FUNC2)>,
+-				 <S32CC_PINMUX(720, FUNC2)>;
++/*			pinmux = <S32CC_PINMUX(719, FUNC2)>,
++				 <S32CC_PINMUX(720, FUNC2)>; */
+ 		};
+ 
+ 	};
+ 
+ 	i2c2_gpio_pins: i2c2grp_gpio {
+ 		i2c2_gpio_grp0 {
+-			pinmux = <S32CC_PINMUX(719, FUNC0)>,
+-				 <S32CC_PINMUX(720, FUNC0)>;
++/*			pinmux = <S32CC_PINMUX(719, FUNC0)>,
++				 <S32CC_PINMUX(720, FUNC0)>;  */
+ 		};
+ 
+ 		i2c2_gpio_grp1 {
+-			pinmux = <S32CC_PINMUX(21, FUNC0)>,
+-				 <S32CC_PINMUX(22, FUNC0)>;
++		/*	pinmux = <S32CC_PINMUX(21, FUNC0)>,
++				 <S32CC_PINMUX(22, FUNC0)>;*/
+ 			drive-open-drain;
+ 			output-enable;
+ 			slew-rate = <S32CC_SLEW_208MHZ>;
+@@ -719,7 +719,7 @@
+ 	pinctrl-0 = <&dspi1_pins>;
+ 	pinctrl-1 = <&dspi1_slave_pins>;
+ 	pinctrl-names = "default", "slave";
+-	status = "okay";
++	status = "disable";
+ };
+ 
+ &spi5 {
+-- 
+2.17.1
+
